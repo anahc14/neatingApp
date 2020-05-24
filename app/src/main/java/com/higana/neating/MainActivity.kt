@@ -12,8 +12,7 @@ class MainActivity : Activity() {
     @SuppressLint("InflateParams")
     override fun onCreate(@Nullable savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        val view = layoutInflater.inflate(R.layout.activity_main, null)
+        setContentView(R.layout.activity_main)
 
     }
 
