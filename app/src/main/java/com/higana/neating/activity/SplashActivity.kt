@@ -1,4 +1,4 @@
-package com.higana.neating
+package com.higana.neating.activity
 
 import android.content.Intent
 import android.os.Bundle

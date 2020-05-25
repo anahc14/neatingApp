@@ -1,4 +1,6 @@
 <resources>
     <string name="app_name">NEating</string>
     <string name="recipes">Recipes</string>
+    <string name="calendar">Calendar</string>
+    <string name="shopping_list">Shopping List</string>
 </resources>

@@ -9,7 +9,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme" >
 
-    <activity android:name=".SplashActivity" android:theme="@style/SplashTheme">
+    <activity android:name=".activity.SplashActivity" android:theme="@style/SplashTheme">
         <intent-filter>
             <action android:name="android.intent.action.MAIN" />
             <category android:name="android.intent.category.LAUNCHER" />
@@ -19,8 +19,21 @@
     </activity>
 
         <activity
-            android:name=".MainActivity"
+            android:name=".activity.MainActivity"
             android:theme="@style/AppTheme" />
+
+        <activity
+            android:name=".activity.CalendarActivity"
+            android:theme="@style/AppTheme" />
+
+        <activity
+            android:name=".activity.RecipesActivity"
+            android:theme="@style/AppTheme" />
+
+        <activity
+            android:name=".activity.ShoppingListActivity"
+            android:theme="@style/AppTheme" />
+
 
         <meta-data
             android:name="preloaded_fonts"
