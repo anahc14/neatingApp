@@ -27,5 +27,4 @@ class ResponseModel {
         @SerializedName("weight") var weight: Double
     )
 
-
 }

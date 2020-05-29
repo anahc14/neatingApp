@@ -9,7 +9,6 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 class MyApiAdapter {
 
-    private lateinit var API_SERVICE: MyApiService
     private lateinit var context: Context
     private lateinit var retrofitInstance: Retrofit
 
