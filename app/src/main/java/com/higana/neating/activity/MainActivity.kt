@@ -1,7 +1,6 @@
 package com.higana.neating.activity
 
 import android.annotation.SuppressLint
-import android.app.Fragment
 import android.content.Intent
 import android.os.Bundle
 import androidx.annotation.Nullable
@@ -33,10 +32,6 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent(this, ShoppingListActivity::class.java)
             startActivity(intent)
         }
-    }
-
-    override fun onAttachFragment(fragment: Fragment?) {
-        super.onAttachFragment(fragment)
     }
 }
 
