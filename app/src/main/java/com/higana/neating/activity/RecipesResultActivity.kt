@@ -1,35 +1,35 @@
 package com.higana.neating.activity
 
-import android.app.Activity
 import android.os.Bundle
-import androidx.annotation.Nullable
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.higana.neating.R
 import com.higana.neating.databinding.RecyclerViewBinding
-import com.higana.neating.ui.adapter.MyDataAdapter
+import com.higana.neating.model.ResponseModel
+import com.higana.neating.ui.adapter.RecyclerAdapter
 
-class RecipesResultActivity : Activity() {
+class RecipesResultActivity : AppCompatActivity() {
 
     private lateinit var binding: RecyclerViewBinding
-    private lateinit var recyclerView: RecyclerView
-    private lateinit var viewAdapter: RecyclerView.Adapter<*>
-    private lateinit var viewManager: RecyclerView.LayoutManager
+    private lateinit var adapter: RecyclerAdapter
+    private var myDataSet: ArrayList<ResponseModel.RecipeInformation> = (
+            ArrayList())
+    private val recyclerAdapter: RecyclerAdapter = RecyclerAdapter(this.myDataSet)
+    private lateinit var myList: ArrayList<ResponseModel.RecipeInformation>
 
-
-    override fun onCreate(@Nullable savedInstanceState: Bundle?) {
+    public override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = RecyclerViewBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        adapter = RecyclerAdapter(myDataSet)
+        binding.recyclerView.adapter = adapter
+        binding.recyclerView.layoutManager = LinearLayoutManager(this)
+        myList = intent.getSerializableExtra("recipes") as ArrayList<ResponseModel.RecipeInformation>
+    }
 
-        viewManager = LinearLayoutManager(this)
-        viewAdapter = MyDataAdapter()
-
-        recyclerView = findViewById<RecyclerView>(R.id.my_recycler_view).apply {
-            setHasFixedSize(true)
-            layoutManager = viewManager
-            adapter = viewAdapter
+    override fun onStart() {
+        super.onStart()
+        if (myDataSet.size == 0) {
+            recyclerAdapter.addAllItems(myList)
         }
-
     }
 }

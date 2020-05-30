@@ -8,7 +8,7 @@ import androidx.annotation.Nullable
 import com.higana.neating.databinding.RecipesFragmentBinding
 import com.higana.neating.io.MyApiAdapter
 import com.higana.neating.model.ResponseModel
-import com.higana.neating.ui.adapter.MyDataAdapter
+import com.higana.neating.ui.adapter.RecyclerAdapter
 import org.jetbrains.anko.doAsync
 import retrofit2.Call
 import retrofit2.Callback
@@ -24,8 +24,18 @@ class RecipesActivity : Activity() {
     private lateinit var binding: RecipesFragmentBinding
     private lateinit var mainIngredient: String
     private lateinit var recipes: ArrayList<ResponseModel.RecipeInformation>
+    private val myApiAdapter = MyApiAdapter()
+    private var myData: ArrayList<ResponseModel.RecipeInformation> =
+        ArrayList<ResponseModel.RecipeInformation>()
+    private val recyclerAdapter: RecyclerAdapter = RecyclerAdapter(myData)
 
-    private lateinit var mAdapter: MyDataAdapter
+
+    fun getMyData(): ArrayList<ResponseModel.RecipeInformation> {
+        return myData
+    }
+
+    private val myDataSet: ArrayList<ResponseModel.RecipeInformation> = (
+            ArrayList())
 
     override fun onCreate(@Nullable savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,19 +43,14 @@ class RecipesActivity : Activity() {
         setContentView(binding.root)
         binding.button.setOnClickListener {
             mainIngredient = binding.editText.text.toString()
-            mAdapter = MyDataAdapter()
-            val myApiAdapter = MyApiAdapter()
-            recipes = getRecipes(myApiAdapter)
+            recipes = getRecipes()
         }
 
     }
 
-    private fun getRecipes(myApiAdapter: MyApiAdapter): ArrayList<ResponseModel.RecipeInformation> {
+    fun getRecipes(): ArrayList<ResponseModel.RecipeInformation> {
         val call = myApiAdapter.getMyApiService(applicationContext)
             .getData(app_id = APP_ID, app_key = APP_KEY, q = mainIngredient)
-
-        var myData: ArrayList<ResponseModel.RecipeInformation> =
-            ArrayList<ResponseModel.RecipeInformation>()
         doAsync {
             call.enqueue(object : Callback<ResponseModel> {
                 override fun onFailure(call: Call<ResponseModel>, t: Throwable) {
@@ -57,10 +62,9 @@ class RecipesActivity : Activity() {
                     response: Response<ResponseModel>
                 ) {
                     myData.addAll(response.body()!!.hits)
-                    mAdapter.setDataSet(myData)
-
                     if (response.isSuccessful) {
                         val intent = Intent(applicationContext, RecipesResultActivity::class.java)
+                        intent.putExtra("recipes", myData)
                         startActivity(intent)
                     }
                 }
