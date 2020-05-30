@@ -1,5 +1,6 @@
 package com.higana.neating.model
 
+import android.net.Uri
 import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
 import kotlinx.android.parcel.Parcelize
@@ -18,6 +19,7 @@ class ResponseModel {
     @Parcelize
     data class Recipe(
         @SerializedName("label") var label: String,
+        @SerializedName("image") var image: String,
         @SerializedName("yield") var yield: String,
         @SerializedName("dietLabels") var dietLabels: List<String>,
         @SerializedName("healthLabels") var healthLabels: List<String>,

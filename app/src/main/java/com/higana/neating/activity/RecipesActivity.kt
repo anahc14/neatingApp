@@ -4,6 +4,9 @@ import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.View
+import android.view.inputmethod.InputMethodManager
+import android.widget.SearchView
 import androidx.annotation.Nullable
 import com.higana.neating.databinding.RecipesFragmentBinding
 import com.higana.neating.io.MyApiAdapter
@@ -29,7 +32,6 @@ class RecipesActivity : Activity() {
         ArrayList<ResponseModel.RecipeInformation>()
     private val recyclerAdapter: RecyclerAdapter = RecyclerAdapter(myData)
 
-
     fun getMyData(): ArrayList<ResponseModel.RecipeInformation> {
         return myData
     }
@@ -41,11 +43,21 @@ class RecipesActivity : Activity() {
         super.onCreate(savedInstanceState)
         binding = RecipesFragmentBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        binding.button.setOnClickListener {
-            mainIngredient = binding.editText.text.toString()
-            recipes = getRecipes()
-        }
+        binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener,
+            androidx.appcompat.widget.SearchView.OnQueryTextListener {
 
+            override fun onQueryTextChange(newText: String): Boolean {
+                return false
+            }
+
+            override fun onQueryTextSubmit(query: String): Boolean {
+                hideKeyboard(this@RecipesActivity)
+                mainIngredient = query
+                recipes = getRecipes()
+                return true
+            }
+
+        })
     }
 
     fun getRecipes(): ArrayList<ResponseModel.RecipeInformation> {
@@ -61,6 +73,7 @@ class RecipesActivity : Activity() {
                     call: Call<ResponseModel>,
                     response: Response<ResponseModel>
                 ) {
+                    myData.clear()
                     myData.addAll(response.body()!!.hits)
                     if (response.isSuccessful) {
                         val intent = Intent(applicationContext, RecipesResultActivity::class.java)
@@ -73,6 +86,18 @@ class RecipesActivity : Activity() {
 
         }
         return myData
+    }
+
+    fun hideKeyboard(activity: Activity) {
+        val imm: InputMethodManager =
+            activity.getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
+        //Find the currently focused view, so we can grab the correct window token from it.
+        var view: View? = activity.currentFocus
+        //If no view currently has focus, create a new one, just so we can grab a window token from it
+        if (view == null) {
+            view = View(activity)
+        }
+        imm.hideSoftInputFromWindow(view.getWindowToken(), 0)
     }
 
 }

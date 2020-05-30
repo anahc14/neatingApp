@@ -8,7 +8,7 @@
 
     <androidx.cardview.widget.CardView
         android:id="@+id/recipes_card_view"
-        android:layout_width="250dp"
+        android:layout_width="300dp"
         android:layout_height="150dp"
         android:layout_marginBottom="40dp"
         android:theme="@style/Cards">
@@ -39,7 +39,7 @@
 
     <androidx.cardview.widget.CardView
         android:id="@+id/calendar_card_view"
-        android:layout_width="250dp"
+        android:layout_width="300dp"
         android:layout_height="150dp"
         android:layout_marginBottom="40dp"
         android:theme="@style/Cards">
@@ -68,7 +68,7 @@
 
     <androidx.cardview.widget.CardView
         android:id="@+id/shopping_list_card_view"
-        android:layout_width="250dp"
+        android:layout_width="300dp"
         android:layout_height="150dp"
         android:layout_marginBottom="25dp"
         android:theme="@style/Cards">

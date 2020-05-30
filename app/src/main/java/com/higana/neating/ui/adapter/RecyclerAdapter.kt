@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.higana.neating.R
 import com.higana.neating.inflate
 import com.higana.neating.model.ResponseModel
+import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.recyclerview_item_row.view.*
 
 class RecyclerAdapter(
@@ -52,9 +53,9 @@ class RecyclerAdapter(
 
         fun bindRecipe(recipe: ResponseModel.RecipeInformation) {
             this.recipesInfo = recipe
-            // Picasso.with(view.context).load(photo.url).into(view.itemImage)
+            Picasso.get().load(recipe.recipe.image).resize(800,500).centerCrop().into(view.recipe_image);
             view.recipe_title.text = recipe.recipe.label
-            // view.itemDescription.text = photo.explanation
+            view.recipe_yield.text = recipe.recipe.yield
         }
 
         companion object {

@@ -2,7 +2,9 @@
 <resources>
     <color name="base_green">#C4FDAF</color>
     <color name="dark_blue">#334360</color>
+
     <color name="white">#FFFFFF</color>
+    <color name="black">#000000</color>
     <color name="olive_green">#4C6B3B</color>
     <color name="medium_green">#789C65</color>
     <color name="darkest_green">#515C4D</color>
@@ -10,5 +12,8 @@
     <color name="backgroundColor">#EEDCFD</color>
     <color name="dark_purple">#351152</color>
     <color name="cards_background">#AE9ADE</color>
+    <color name="light_grey">#7C7C7C</color>
+    <color name="dark_grey">#505050</color>
+
 
 </resources>
