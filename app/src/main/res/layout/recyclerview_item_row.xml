@@ -34,11 +34,13 @@
                 android:id="@+id/recipe_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
                 android:theme="@style/RecipeTitle" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/recipe_calories"
                 android:layout_width="match_parent"
+                android:layout_marginStart="10dp"
                 android:layout_height="wrap_content" />
         </LinearLayout>
 

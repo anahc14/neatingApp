@@ -1,9 +1,11 @@
 package com.higana.neating.ui.adapter
 
+import android.content.Intent
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.higana.neating.R
+import com.higana.neating.activity.RecipeInformationActivity
 import com.higana.neating.inflate
 import com.higana.neating.model.SpoonRecipeInformation
 import com.squareup.picasso.Picasso
@@ -46,10 +48,10 @@ class RecyclerAdapter(
         }
 
         override fun onClick(v: View) {
-//            val context = itemView.context
-//            val showRecipeIntent = Intent(context, RecipesActivity::class.java)
-//            showRecipeIntent.putExtra(RECIPE_KEY, recipesInfo)
-//            context.startActivity(showRecipeIntent)
+            val context = itemView.context
+            val showRecipeIntent = Intent(context, RecipeInformationActivity::class.java)
+            showRecipeIntent.putExtra(RECIPE_KEY, recipesInfo)
+            context.startActivity(showRecipeIntent)
         }
 
         fun bindRecipe(recipe: SpoonRecipeInformation) {

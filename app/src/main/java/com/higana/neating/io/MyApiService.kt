@@ -19,4 +19,11 @@ interface MyApiService {
         @Query("apiKey") app_key: String,
         @Query("query") q: String
     ): Call<FullResponse>
+
+
+    @GET("{id}/information")
+    fun getRecipeInformation(
+        @Query("apiKey") app_key: String,
+        @Query("query") q: String
+    ): Call<FullResponse>
 }
