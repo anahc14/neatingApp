@@ -1,18 +1,22 @@
 package com.higana.neating.io
 
-import com.higana.neating.model.ResponseModel
-import retrofit2.Call
 
+import com.higana.neating.model.FullResponse
+import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Query
 
 interface MyApiService {
 
     @GET("search")
-    fun getData(
-        @Query("q") q: String,
-        @Query("app_id") app_id: String,
-        @Query("app_key") app_key: String
-    ): Call<ResponseModel>
+    fun getSpoonData(
+        @Query("apiKey") app_key: String,
+        @Query("query") q: String
+    ): Call<FullResponse>
 
+    @GET("complexSearch")
+    fun complexSearchRecipe(
+        @Query("apiKey") app_key: String,
+        @Query("query") q: String
+    ): Call<FullResponse>
 }

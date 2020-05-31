@@ -5,12 +5,12 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.higana.neating.R
 import com.higana.neating.inflate
-import com.higana.neating.model.ResponseModel
+import com.higana.neating.model.SpoonRecipeInformation
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.recyclerview_item_row.view.*
 
 class RecyclerAdapter(
-    private val recipesInfo: ArrayList<ResponseModel.RecipeInformation>
+    private val recipesInfo: ArrayList<SpoonRecipeInformation>
 ) : RecyclerView.Adapter<RecyclerAdapter.CustomHolder>() {
 
     override fun onCreateViewHolder(
@@ -30,7 +30,7 @@ class RecyclerAdapter(
         holder.bindRecipe(itemRecipe)
     }
 
-    fun addAllItems(items: ArrayList<ResponseModel.RecipeInformation>) {
+    fun addAllItems(items: ArrayList<SpoonRecipeInformation>) {
         recipesInfo.addAll(items)
         notifyDataSetChanged()
     }
@@ -38,7 +38,8 @@ class RecyclerAdapter(
     class CustomHolder(v: View) : RecyclerView.ViewHolder(v), View.OnClickListener {
 
         private var view: View = v
-        private var recipesInfo: ResponseModel.RecipeInformation? = null
+        private var recipesInfo: SpoonRecipeInformation? = null
+        private var recipesImage: String? = ""
 
         init {
             v.setOnClickListener(this)
@@ -51,11 +52,12 @@ class RecyclerAdapter(
 //            context.startActivity(showRecipeIntent)
         }
 
-        fun bindRecipe(recipe: ResponseModel.RecipeInformation) {
+        fun bindRecipe(recipe: SpoonRecipeInformation) {
             this.recipesInfo = recipe
-            Picasso.get().load(recipe.recipe.image).resize(800,500).centerCrop().into(view.recipe_image);
-            view.recipe_title.text = recipe.recipe.label
-            view.recipe_yield.text = recipe.recipe.yield
+
+            Picasso.get().load(recipe.image).resize(800,450).centerCrop().into(view.recipe_image);
+            view.recipe_title.text = recipe.title
+            view.recipe_calories.text = recipe.calories.toString()
         }
 
         companion object {

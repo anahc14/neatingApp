@@ -1,9 +1,8 @@
 package com.higana.neating.io
 
 import android.content.Context
+import android.provider.Settings.Global.getString
 import com.higana.neating.R
-import com.higana.neating.model.ResponseModel
-import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 

@@ -8,5 +8,5 @@
     <string name="search_recipes">¿Qué quieres comer?</string>
     <string name="search_hint">Ensalada</string>
 
-    <string name="base_url">https://test-es.edamam.com/</string>
+    <string name="base_url">https://api.spoonacular.com/recipes/</string>
 </resources>

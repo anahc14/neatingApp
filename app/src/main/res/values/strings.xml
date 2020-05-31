@@ -7,7 +7,7 @@
     <string name="search_recipes">What do you want to eat?</string>
     <string name="search_hint">Salad</string>
 
-    <string name="base_url">https://api.edamam.com/</string>
+    <string name="base_url">https://api.spoonacular.com/recipes/</string>
 
 
 </resources>
