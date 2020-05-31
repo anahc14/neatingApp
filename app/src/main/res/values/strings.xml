@@ -1,13 +1,18 @@
 <resources>
     <string name="app_name">nEating</string>
+    <string name="no_title_actionbar" />
     <string name="recipes">Recipes</string>
     <string name="calendar">Calendar</string>
     <string name="shopping_list">Shopping List</string>
 
     <string name="search_recipes">What do you want to eat?</string>
     <string name="search_hint">Salad</string>
+    <string name="ingredients_text">Ingredients</string>
+    <string name="nothing_found">No results were found. \n Please, introduce another food.</string>
 
     <string name="base_url">https://api.spoonacular.com/recipes/</string>
+    <string name="app_key">207b80afad104181960ee53009c0de43</string>
+
 
 
 </resources>

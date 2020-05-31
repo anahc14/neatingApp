@@ -3,18 +3,22 @@ package com.higana.neating.activity
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
+import android.view.WindowManager
 import androidx.annotation.Nullable
 import androidx.appcompat.app.AppCompatActivity
+import com.higana.neating.R
 import com.higana.neating.databinding.MainCardsBinding
 
 
 class MainActivity : AppCompatActivity() {
+
 
     private lateinit var binding: MainCardsBinding
 
     @SuppressLint("InflateParams")
     override fun onCreate(@Nullable savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         binding = MainCardsBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
@@ -33,5 +37,7 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }
     }
+
+
 }
 

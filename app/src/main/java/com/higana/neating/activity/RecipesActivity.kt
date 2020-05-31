@@ -2,12 +2,13 @@ package com.higana.neating.activity
 
 import android.app.Activity
 import android.os.Bundle
-import android.util.Log
 import android.view.View
+import android.view.WindowManager
 import android.view.inputmethod.InputMethodManager
 import android.widget.SearchView
 import androidx.annotation.Nullable
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.higana.neating.R
 import com.higana.neating.databinding.RecipesFragmentBinding
 import com.higana.neating.io.MyApiAdapter
 import com.higana.neating.model.FullResponse
@@ -18,10 +19,9 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-
 class RecipesActivity : Activity() {
 
-    private val SPOON_APP_KEY: String = "207b80afad104181960ee53009c0de43"
+
     private lateinit var binding: RecipesFragmentBinding
     private lateinit var mainIngredient: String
     private val myApiAdapter = MyApiAdapter()
@@ -33,6 +33,10 @@ class RecipesActivity : Activity() {
 
     override fun onCreate(@Nullable savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        getWindow().setFlags(
+            WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS,
+            WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS
+        )
         binding = RecipesFragmentBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
@@ -55,22 +59,26 @@ class RecipesActivity : Activity() {
 
     fun getRecipes(): ArrayList<SpoonRecipeInformation> {
         val call = myApiAdapter.getMyApiService(applicationContext)
-            .complexSearchRecipe(app_key = SPOON_APP_KEY, q = mainIngredient)
+            .complexSearchRecipe(app_key = getString(R.string.app_key), q = mainIngredient)
         doAsync {
 
             call.enqueue(object : Callback<FullResponse> {
                 override fun onFailure(call: Call<FullResponse>, t: Throwable) {
-                    Log.v("retrofit", "call failed")
+                    binding.noResultsFound.visibility = View.VISIBLE
                 }
 
                 override fun onResponse(
                     call: Call<FullResponse>,
                     response: Response<FullResponse?>
                 ) {
+                    binding.noResultsFound.visibility = View.GONE
                     myData.clear()
                     if (response.isSuccessful) {
                         myData.addAll(response.body()!!.results)
-                        displayRecyclerView()
+                        if (!myData.isEmpty())
+                            displayRecyclerView()
+                        else
+                            binding.noResultsFound.visibility = View.VISIBLE
                     }
 
                 }

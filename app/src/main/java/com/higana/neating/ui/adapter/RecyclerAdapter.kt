@@ -57,7 +57,7 @@ class RecyclerAdapter(
         fun bindRecipe(recipe: SpoonRecipeInformation) {
             this.recipesInfo = recipe
 
-            Picasso.get().load(recipe.image).resize(800,450).centerCrop().into(view.recipe_image);
+            Picasso.get().load(recipe.image).resize(800, 450).centerCrop().into(view.recipe_image)
             view.recipe_title.text = recipe.title
             view.recipe_calories.text = recipe.calories.toString()
         }

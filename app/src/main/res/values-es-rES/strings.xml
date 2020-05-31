@@ -1,12 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">neating</string>
+    <string name="no_title_actionbar" />
     <string name="recipes">Recetas</string>
     <string name="calendar">Calendario</string>
     <string name="shopping_list">Lista de la compra</string>
 
     <string name="search_recipes">¿Qué quieres comer?</string>
     <string name="search_hint">Ensalada</string>
+    <string name="ingredients_text">Ingredientes</string>
+    <string name="nothing_found">No se encontraron resultados. %\n Por favor, introduce otra comida.</string>
 
     <string name="base_url">https://api.spoonacular.com/recipes/</string>
+    <string name="app_key">207b80afad104181960ee53009c0de43</string>
+
 </resources>
