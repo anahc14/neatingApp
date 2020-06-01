@@ -1,20 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_marginTop="14dp"
-    android:orientation="vertical">
+    android:layout_height="match_parent">
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        android:fillViewport="true">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="15dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="15dp"
             android:orientation="vertical">
 
             <androidx.appcompat.widget.AppCompatImageView
@@ -24,29 +20,51 @@
                 android:adjustViewBounds="true"
                 android:scaleType="fitCenter" />
 
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/recipe_title"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingTop="3dp"
-                android:theme="@style/RecipeTitleBlack" />
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="14dp"
+                android:layout_marginEnd="15dp"
+                android:layout_marginBottom="50dp"
+                android:orientation="vertical">
 
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/recipe_summary"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingTop="2dp"
-                android:textSize="15sp" />
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/recipe_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="3dp"
+                    android:theme="@style/RecipeTitleBlack" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/recipe_summary"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="2dp"
+                    android:textSize="15sp" />
 
 
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/ingredients_text"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingTop="3dp"
-                android:text="@string/ingredients_text"
-                android:theme="@style/RecipeTitleBlack" />
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/ingredients_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="3dp"
+                    android:text="@string/ingredients_text"
+                    android:theme="@style/RecipeTitleBlack" />
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:descendantFocusability="blocksDescendants">
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/recyclerView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:nestedScrollingEnabled="false" />
+                </RelativeLayout>
+            </LinearLayout>
 
         </LinearLayout>
     </ScrollView>
-</androidx.appcompat.widget.LinearLayoutCompat>
+</LinearLayout>

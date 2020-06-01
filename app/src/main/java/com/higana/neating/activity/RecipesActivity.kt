@@ -13,11 +13,12 @@ import com.higana.neating.databinding.RecipesFragmentBinding
 import com.higana.neating.io.MyApiAdapter
 import com.higana.neating.model.FullResponse
 import com.higana.neating.model.SpoonRecipeInformation
-import com.higana.neating.ui.adapter.RecyclerAdapter
+import com.higana.neating.ui.adapter.RecyclerRecipesListAdapter
 import org.jetbrains.anko.doAsync
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+
 
 class RecipesActivity : Activity() {
 
@@ -28,7 +29,7 @@ class RecipesActivity : Activity() {
     private var myData: ArrayList<SpoonRecipeInformation> =
         ArrayList()
     private lateinit var recipes: ArrayList<SpoonRecipeInformation>
-    private lateinit var adapter: RecyclerAdapter
+    private lateinit var adapter: RecyclerRecipesListAdapter
 
 
     override fun onCreate(@Nullable savedInstanceState: Bundle?) {
@@ -40,6 +41,7 @@ class RecipesActivity : Activity() {
         binding = RecipesFragmentBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        binding.searchView.queryHint = getString(R.string.search_recipes)
         binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener,
             androidx.appcompat.widget.SearchView.OnQueryTextListener {
             override fun onQueryTextChange(newText: String): Boolean {
@@ -90,7 +92,7 @@ class RecipesActivity : Activity() {
     }
 
     fun displayRecyclerView() {
-        adapter = RecyclerAdapter(myData)
+        adapter = RecyclerRecipesListAdapter(myData)
         binding.recyclerView.adapter = adapter
         binding.recyclerView.layoutManager = LinearLayoutManager(this)
         binding.recyclerView.visibility = View.VISIBLE

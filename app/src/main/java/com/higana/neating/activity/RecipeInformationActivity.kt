@@ -1,18 +1,21 @@
 package com.higana.neating.activity
 
 import android.app.Activity
+import android.content.Context
 import android.os.Bundle
 import android.text.Html
 import android.util.Log
 import android.view.View
 import android.view.WindowManager
 import androidx.annotation.Nullable
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.higana.neating.R
 import com.higana.neating.databinding.RecipeInformationBinding
 import com.higana.neating.io.MyApiAdapter
 import com.higana.neating.model.Ingredients
 import com.higana.neating.model.RecipeFullInformation
 import com.higana.neating.model.SpoonRecipeInformation
+import com.higana.neating.ui.adapter.RecyclerIngredientsAdapter
 import com.squareup.picasso.Picasso
 import org.jetbrains.anko.doAsync
 import retrofit2.Call
@@ -26,6 +29,7 @@ class RecipeInformationActivity : Activity() {
     private lateinit var binding: RecipeInformationBinding
     private lateinit var recipeBasicInformation: SpoonRecipeInformation
     private var recipeFullInformation: RecipeFullInformation = RecipeFullInformation()
+    private lateinit var adapter: RecyclerIngredientsAdapter
 
     override fun onCreate(@Nullable savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,7 +41,16 @@ class RecipeInformationActivity : Activity() {
         setContentView(binding.root)
         recipeBasicInformation = intent.getParcelableExtra("RECIPE")
         getRecipeInformation()
-        //   displayRecipeView();
+
+    }
+
+    fun displayRecyclerView(myData: ArrayList<Ingredients>) {
+        adapter = RecyclerIngredientsAdapter(myData)
+        binding.recyclerView.adapter = adapter
+        binding.recyclerView.layoutManager =
+            CustomLinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+        binding.recyclerView.isNestedScrollingEnabled = false
+        binding.recyclerView.visibility = View.VISIBLE
     }
 
 
@@ -66,6 +79,9 @@ class RecipeInformationActivity : Activity() {
                         binding.recipeSummary.setText(
                             Html.fromHtml(recipeFullInformation.summary)
                         )
+                        var myIngredients: ArrayList<Ingredients> = ArrayList()
+                        myIngredients.addAll(recipeFullInformation.extendedIngredients)
+                        displayRecyclerView(myIngredients)
 
                     }
 
@@ -75,6 +91,18 @@ class RecipeInformationActivity : Activity() {
             })
         }
         return recipeFullInformation
+    }
+
+    class CustomLinearLayoutManager(
+        context: Context?,
+        orientation: Int,
+        reverseLayout: Boolean
+    ) :
+        LinearLayoutManager(context, orientation, reverseLayout) {
+
+        override fun canScrollVertically(): Boolean {
+            return false
+        }
     }
 
 }

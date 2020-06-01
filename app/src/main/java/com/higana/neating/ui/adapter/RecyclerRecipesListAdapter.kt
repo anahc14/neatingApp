@@ -9,17 +9,17 @@ import com.higana.neating.activity.RecipeInformationActivity
 import com.higana.neating.inflate
 import com.higana.neating.model.SpoonRecipeInformation
 import com.squareup.picasso.Picasso
-import kotlinx.android.synthetic.main.recyclerview_item_row.view.*
+import kotlinx.android.synthetic.main.recipes_recyclerview_item_row.view.*
 
-class RecyclerAdapter(
+class RecyclerRecipesListAdapter(
     private val recipesInfo: ArrayList<SpoonRecipeInformation>
-) : RecyclerView.Adapter<RecyclerAdapter.CustomHolder>() {
+) : RecyclerView.Adapter<RecyclerRecipesListAdapter.CustomHolder>() {
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
-    ): RecyclerAdapter.CustomHolder {
-        val inflatedView = parent.inflate(R.layout.recyclerview_item_row, false)
+    ): RecyclerRecipesListAdapter.CustomHolder {
+        val inflatedView = parent.inflate(R.layout.recipes_recyclerview_item_row, false)
         return CustomHolder(inflatedView)
     }
 
@@ -27,7 +27,7 @@ class RecyclerAdapter(
         return recipesInfo.size
     }
 
-    override fun onBindViewHolder(holder: RecyclerAdapter.CustomHolder, position: Int) {
+    override fun onBindViewHolder(holder: RecyclerRecipesListAdapter.CustomHolder, position: Int) {
         val itemRecipe = recipesInfo[position]
         holder.bindRecipe(itemRecipe)
     }
